@@ -90,7 +90,8 @@ else:macx {
     layouts.files += etc/memory_layouts/osx/v0.40.10_osx.ini
     QMAKE_BUNDLE_DATA += layouts
 }
-else:unix {
+
+unix {
     message(Setting up for Linux)
     HEADERS += inc/dfinstancelinux.h
     SOURCES += src/dfinstancelinux.cpp
