@@ -1514,6 +1514,7 @@ void Dwarf::read_inventory(){
     bool include_mat_name = DT->user_settings()->value("options/docks/equipoverview_include_mats",false).toBool();
     foreach(VIRTADDR inventory_item_addr, m_df->enumerate_vector(m_address + m_mem->dwarf_offset("inventory"))){
         inv_type = m_df->read_short(inventory_item_addr + m_mem->dwarf_offset("inventory_item_mode"));
+        LOGD << "  + inv_type:" << inv_type;
         bp_id = m_df->read_short(inventory_item_addr + m_mem->dwarf_offset("inventory_item_bodypart"));
 
         if(inv_type == 1 || inv_type == 2 || inv_type == 4 || inv_type == 8 || inv_type == 10){
@@ -1525,6 +1526,8 @@ void Dwarf::read_inventory(){
             VIRTADDR item_ptr = m_df->read_addr(inventory_item_addr);
             Item *i = new Item(m_df,item_ptr,this);
             ITEM_TYPE i_type = i->item_type();
+            LOGD << "  + i_type:" << i_type;
+            LOGD << "  + i:" << i;
 
             int affection_level = item_affection.value(i->id());
             if(affection_level > 0)
